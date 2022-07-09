@@ -1,8 +1,11 @@
 import { recordLiveStream } from './src/recordLiveStream.js'
 import { handleOptions } from './src/optionHandler.js'
+import { mkdir } from 'node:fs/promises'
 
 async function main () {
   const options = await handleOptions()
+  await mkdir('temp', { recursive: true })
+  await mkdir('output', { recursive: true })
   options.verbose && console.log(options)
   const { result, saveAndExitSignal } = await recordLiveStream(options)
  
