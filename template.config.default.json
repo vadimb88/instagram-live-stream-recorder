@@ -1,0 +1,12 @@
+{
+  "csrfToken": "##your csrfToken##",
+  "sessionId": "##your sessionId##",
+  "proxy": "##proxy string##",
+  "ffmpegOutputOptions": [
+    "-c:v copy",
+    "-c:a aac"
+  ],
+  "verbose": true,
+  "full": true,
+  "leaveTemp": false
+}
