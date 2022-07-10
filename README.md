@@ -4,16 +4,16 @@ This command line program records ongoing live stream and save it into .mp4 vide
 ## Installation
 This program uses ffmpeg for video postprocessing. You need to install it using [official site](https://ffmpeg.org/download.html).
 
-Then you need to add it to `PATH` or set `FFMPEG_PATH` and `FFPROBE_PATH` environment variables as it described [here](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/blob/master/README.md#ffmpeg-and-ffprobe)
+Then you need to add it to `PATH` or set `FFMPEG_PATH` and `FFPROBE_PATH` environment variables as it described [here](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/blob/master/README.md#ffmpeg-and-ffprobe).
 
-Next you need to clone this repositiry and install dependencies
+Next you need to clone this repositiry and install dependencies.
 ```
 git clone https://github.com/vadimb88/instagram-live-stream-recorder.git
 cd instagram-live-stream-recorder
 npm install
 ```
 
-## Running
+## Executing
 You need to copy `template.config.default.json` to `config.default.json` and add your csrfToken and sessionId to it. Program loads `config.default.json` by default if it exists and if user hasn't provided another config using `--config` paramenter.
 
 Now you can run the programm:
