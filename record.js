@@ -1,9 +1,13 @@
 import { recordLiveStream } from './src/recordLiveStream.js'
 import { handleOptions } from './src/optionHandler.js'
 import { mkdir } from 'node:fs/promises'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main () {
   const options = await handleOptions()
+  options.dirname = __dirname
   await mkdir('temp', { recursive: true })
   await mkdir('output', { recursive: true })
   options.verbose && console.log(options)

@@ -5,19 +5,18 @@ import { SocksProxyAgent } from 'socks-proxy-agent'
 import LiveVideoRecorder from './LiveVideoRecorder.js'
 import { createWriteStream, createReadStream } from 'fs'
 import { rm } from 'fs/promises'
-import { resolve, dirname } from 'path'
+import { resolve } from 'path'
 import { finished } from 'node:stream/promises'
-import { fileURLToPath } from 'url'
 import ffmpeg from 'fluent-ffmpeg'
 import ansiEscapes from 'ansi-escapes'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+
 const rnd = Math.floor(Math.random() * 100000)
 
-async function makeRecords (liveRecorder, tryToFetchBegining, leaveTemp, verbose) {
+async function makeRecords (liveRecorder, tryToFetchBegining, leaveTemp, verbose, dirname) {
   const startTime = liveRecorder.startTime
-  const videoTempPath = resolve(__dirname, 'temp', `${startTime}-video-temp-${startTime}_${rnd}.m4v`)
-  const audioTempPath = resolve(__dirname, 'temp', `${startTime}-audio-temp-${startTime}_${rnd}.m4a`)
+  const videoTempPath = resolve(dirname, 'temp', `${startTime}-video-temp-${startTime}_${rnd}.m4v`)
+  const audioTempPath = resolve(dirname, 'temp', `${startTime}-audio-temp-${startTime}_${rnd}.m4a`)
   const tempVideoOutput = createWriteStream(videoTempPath)
   const tempAudioOutput = createWriteStream(audioTempPath)
   const initialVideoBuffer = Buffer.from(await liveRecorder.videoInitBlob.arrayBuffer())
@@ -35,8 +34,8 @@ async function makeRecords (liveRecorder, tryToFetchBegining, leaveTemp, verbose
   await finished(videoStream)
   await finished(audioStream)
   if (tryToFetchBegining) {
-    const videoPath = resolve(__dirname, 'temp', `${startTime}-video-${startTime}_${rnd}.m4v`)
-    const audioPath = resolve(__dirname, 'temp', `${startTime}-audio-${startTime}_${rnd}.m4a`)
+    const videoPath = resolve(dirname, 'temp', `${startTime}-video-${startTime}_${rnd}.m4v`)
+    const audioPath = resolve(dirname, 'temp', `${startTime}-audio-${startTime}_${rnd}.m4a`)
 
     const videoOutput = createWriteStream(videoPath)
     const audioOutput = createWriteStream(audioPath)
@@ -85,6 +84,7 @@ export async function recordLiveStream ({
   outputFile,
   leaveTemp,
   verbose,
+  dirname,
  }) {
   const eventLoopFix = () => setTimeout(eventLoopFix, 99999999)
   const fixTimeout = setTimeout(eventLoopFix, 99999999)
@@ -126,7 +126,7 @@ export async function recordLiveStream ({
   } else {
     throw new Error('You need to provide mpdUrl, userId or username')
   }
-  const outputRecordPath = outputFile || resolve(__dirname, 'output', outputRecordFile )
+  const outputRecordPath = outputFile || resolve(dirname, 'output', outputRecordFile )
     
 
   if (initStatus.status === 'fail') {
@@ -136,7 +136,7 @@ export async function recordLiveStream ({
   verbose && console.log(`User id: ${liveRecorder.userId}`)
   verbose && console.log(`Media id: ${liveRecorder.mediaId}`)
   verbose && console.log(`First segment: ${liveRecorder.firstSegment}`)
-  const result = makeRecords(liveRecorder, tryToFetchBegining, leaveTemp, verbose)
+  const result = makeRecords(liveRecorder, tryToFetchBegining, leaveTemp, verbose, dirname)
     .then((records) => {
       if (!records.startTime) {
         console.log(records)
