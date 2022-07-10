@@ -13,7 +13,7 @@ cd instagram-live-stream-recorder
 npm install
 ```
 
-## Executing
+## Execution
 You need to copy `template.config.default.json` to `config.default.json` and add your csrfToken and sessionId to it. Program loads `config.default.json` by default if it exists and if user hasn't provided another config using `--config` paramenter.
 
 Now you can run the programm:
