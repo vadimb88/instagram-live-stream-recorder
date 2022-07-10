@@ -2,8 +2,9 @@
 This command line program records ongoing live stream and save it into .mp4 video file.
 
 ## Installation
-This program uses ffmpeg for postprocessing video. You need to install it using [official site](https://ffmpeg.org/download.html) 
-You need to add it to `PATH` or set `FFMPEG_PATH` and `FFPROBE_PATH` environment variables as it described [here](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/blob/master/README.md#ffmpeg-and-ffprobe)
+This program uses ffmpeg for video postprocessing. You need to install it using [official site](https://ffmpeg.org/download.html).
+
+Then you need to add it to `PATH` or set `FFMPEG_PATH` and `FFPROBE_PATH` environment variables as it described [here](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/blob/master/README.md#ffmpeg-and-ffprobe)
 
 Next you need to clone this repositiry and install dependencies
 ```
