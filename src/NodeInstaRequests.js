@@ -27,7 +27,7 @@ export default class NodeInstaRequests {
     "headers": {
       "accept": "*/*",
       "accept-language": "en-US,en;q=0.9,ru;q=0.8",
-      "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\"",
+      "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"103\", \"Google Chrome\";v=\"103\"",
       "sec-ch-ua-mobile": "?0",
       "sec-ch-ua-platform": "\"Windows\"",
       "sec-fetch-dest": "empty",
@@ -36,7 +36,8 @@ export default class NodeInstaRequests {
       "x-asbd-id": "198387",
       "x-csrftoken": this.csrfToken,
       "x-ig-app-id": this.xIgAppId,
-      "x-ig-www-claim": this.xIgWWWClaim,    
+      "x-ig-www-claim": this.xIgWWWClaim,
+      "cookie": `sessionid=${this.sessionId};`,    
       "Referer": "https://www.instagram.com/",
       "Referrer-Policy": "strict-origin-when-cross-origin"
     },

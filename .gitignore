@@ -1,5 +1,6 @@
 node_modules
 config.json
 config.default.json
+test.js
 output
 temp
